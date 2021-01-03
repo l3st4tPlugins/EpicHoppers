@@ -43,15 +43,15 @@ public class GUIAutoSellFilter extends Gui {
         ItemStack glass1 = GuiUtils.getBorderItem(Settings.GLASS_TYPE_1.getMaterial());
         ItemStack glass2 = GuiUtils.getBorderItem(Settings.GLASS_TYPE_2.getMaterial());
 
-        GuiUtils.mirrorFill(this, 0, 6, true, false, glass2);
-        GuiUtils.mirrorFill(this, 0, 7, true, false, glass2);
-        GuiUtils.mirrorFill(this, 0, 8, true, false, glass2);
-        GuiUtils.mirrorFill(this, 1, 6, true, false, glass2);
-        GuiUtils.mirrorFill(this, 1, 8, true, false, glass2);
-        GuiUtils.mirrorFill(this, 2, 6, true, false, glass2);
-        GuiUtils.mirrorFill(this, 2, 7, true, false, glass1);
-        GuiUtils.mirrorFill(this, 2, 8, true, false, glass2);
-        GuiUtils.mirrorFill(this, 4, 7, false, false, glass1);
+        mirrorFill(0, 6, true, false, glass2);
+        mirrorFill(0, 7, true, false, glass2);
+        mirrorFill(0, 8, true, false, glass2);
+        mirrorFill(1, 6, true, false, glass2);
+        mirrorFill(1, 8, true, false, glass2);
+        mirrorFill(2, 6, true, false, glass2);
+        mirrorFill(2, 7, true, false, glass1);
+        mirrorFill(2, 8, true, false, glass2);
+        mirrorFill(4, 7, false, false, glass1);
 
         setButton(8, GuiUtils.createButtonItem(CompatibleMaterial.ARROW.getItem(),
                 plugin.getLocale().getMessage("general.nametag.back").getMessage()),

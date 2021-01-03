@@ -5,7 +5,9 @@ import com.songoda.epichoppers.hopper.Hopper;
 import com.songoda.epichoppers.hopper.HopperBuilder;
 import com.songoda.epichoppers.hopper.levels.Level;
 import com.songoda.epichoppers.settings.Settings;
+import com.songoda.epichoppers.utils.PrimitiveChunk;
 import org.bukkit.Chunk;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
@@ -39,11 +41,11 @@ public class BlockListeners implements Listener {
         if (plugin.isLiquidtanks() && net.arcaniax.liquidtanks.object.LiquidTankAPI.isLiquidTank(e.getBlock().getLocation()))
             return;
 
-        int amt = count(e.getBlock().getChunk());
+        int amt = count(e.getBlock().getLocation());
 
         int max = maxHoppers(player);
 
-        if (max != -1 && amt > max) {
+        if (max != -1 && amt >= max) {
             player.sendMessage(plugin.getLocale().getMessage("event.hopper.toomany").processPlaceholder("amount", max).getMessage());
             e.setCancelled(true);
             return;
@@ -74,16 +76,21 @@ public class BlockListeners implements Listener {
         return limit;
     }
 
-    private int count(Chunk c) {
-        int count = 0;
-        for (int x = 0; x < 16; x++) {
-            for (int z = 0; z < 16; z++) {
-                for (int y = 0; y < c.getWorld().getMaxHeight(); y++) {
-                    if (c.getBlock(x, y, z).getType() == Material.HOPPER) count++;
+    private int count(Location location) {
+        if (Settings.NORMAL_HOPPERS_LIMIT.getBoolean()) {
+            Chunk c = location.getChunk();
+            int count = 0;
+            for (int x = 0; x < 16; x++) {
+                for (int z = 0; z < 16; z++) {
+                    for (int y = 0; y < c.getWorld().getMaxHeight(); y++) {
+                        if (c.getBlock(x, y, z).getType() == Material.HOPPER) count++;
+                    }
                 }
             }
+            return count;
+        }else{
+            return plugin.getHopperManager().getHoppers(PrimitiveChunk.of(location)).size();
         }
-        return count;
     }
 
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)

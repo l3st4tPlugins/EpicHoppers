@@ -54,6 +54,10 @@ public class Settings {
     public static final ConfigSetting MAX_CHUNK = new ConfigSetting(config, "Main.Max Hoppers Per Chunk", -1,
             "The maximum amount of hoppers per chunk.");
 
+    public static final ConfigSetting NORMAL_HOPPERS_LIMIT = new ConfigSetting(config, "Main.Normal Hoppers Count Towards Limit", false,
+            "If normal hoppers count towards the maximum",
+            "amount of hoppers in a chunk.");
+
     public static final ConfigSetting BLOCKBREAK_PARTICLE = new ConfigSetting(config, "Main.BlockBreak Particle Type", "LAVA",
             "The particle shown when the block break module performs a block break.");
 
