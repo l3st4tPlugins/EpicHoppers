@@ -37,11 +37,9 @@ public class PrimitiveChunk {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         PrimitiveChunk that = (PrimitiveChunk) o;
-        boolean checkingEquality = x == that.x &&
+        return x == that.x &&
                 y == that.y &&
                 Objects.equals(world, that.world);
-        System.out.println(checkingEquality);
-        return checkingEquality;
     }
 
     @Override
